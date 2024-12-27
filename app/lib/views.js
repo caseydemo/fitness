@@ -12,29 +12,31 @@ global.mongoose = {
 // create a view that combines all the data from the three collections - connecting on user_id and exercise_id
 export const getAllCombinedData = async () => {
     try {
-        const conn = await dbConnect();
+        const conn = await dbConnect(); // make sure we're connected to the database
         const logs = await conn.model("Log").aggregate([
             {
+                // join the users collection on the user_id field
                 $lookup: {
                     from: "users",
                     localField: "user_id",
                     foreignField: "_id",
-                    as: "user",
+                    as: "user", // alias for the user data
                 },
             },
             {
+                // join the exercises collection on the exercise_id field
                 $lookup: {
                     from: "exercises",
                     localField: "exercise_id",
                     foreignField: "_id",
-                    as: "exercise",
+                    as: "exercise", // alias for the exercise data
                 },
             },
             {
-                $unwind: "$user",
+                $unwind: "$user", // destructure the user data - convert the array to an object
             },
             {
-                $unwind: "$exercise",
+                $unwind: "$exercise", // destructure the exercise data - convert the array to an object
             },
         ]);
         return logs;
