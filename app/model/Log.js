@@ -22,6 +22,10 @@ const logSchema = new Schema({
         type: String,
         required: false,
     },
+    date: {
+        type: Date,
+        required: false
+    },
 });
 
 const Log = model("Log", logSchema);
