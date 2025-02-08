@@ -40,7 +40,7 @@ export async function getAllExercises() {
     try {
         await dbConnect()
         const allExercises = await Exercise.find()
-        console.log('all exercises:', allExercises)
+        return allExercises;
     } catch (error) {
         console.error('error', error)   
     }
