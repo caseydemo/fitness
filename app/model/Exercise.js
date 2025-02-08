@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-const { Schema, model } = mongoose;
+const { Schema, model, models } = mongoose;
 
 const exerciseSchema = new Schema({
     name: {
@@ -12,5 +12,5 @@ const exerciseSchema = new Schema({
     },
 });
 
-const Exercise = model("Exercise", exerciseSchema);
+const Exercise = models.Exercise || model("Exercise", exerciseSchema);
 export default Exercise;
