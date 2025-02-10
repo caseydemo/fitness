@@ -6,15 +6,27 @@ export default function ExerciseInputForm() {
 		description: "",
 	});
 
-	const handleChange = (e) => {
-		const { name, value } = e.target;
-		setFormData((prevState) => ({
-			...prevState,
-			[name]: value,
-		}));
-	};
+    interface FormData {
+        name: string;
+        description: string;
+    }
 
-	const handleSubmit = (e) => {
+    interface ChangeEvent {
+        target: {
+            name: string;
+            value: string;
+        };
+    }
+
+    const handleChange = (e: ChangeEvent) => {
+        const { name, value } = e.target;
+        setFormData((prevState: FormData) => ({
+            ...prevState,
+            [name]: value,
+        }));
+    };
+
+	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		console.log(formData);
 		// Add your submission logic here

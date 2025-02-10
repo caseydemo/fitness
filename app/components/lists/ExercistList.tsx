@@ -5,8 +5,10 @@ export default async function ExerciseList() {
 		<>
 			<table>
 				<thead>
-					<th>name</th>
-					<th>description</th>
+					<tr>
+						<th>name</th>
+						<th>description</th>
+					</tr>
 				</thead>
 				<tbody>
 					{exercises &&
