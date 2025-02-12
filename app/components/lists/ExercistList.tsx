@@ -3,9 +3,15 @@ type Exercise = {
 	id: number;
 	name: string;
 	description: string;
-}
+};
 export default async function ExerciseList() {
-	const exercises = await getAllExercises();
+	const exercises = (await getAllExercises()).map((exercise: any) => ({
+		id: exercise._id,
+		name: exercise.name,
+		description: exercise.description,
+	}));
+	console.log(exercises);
+
 	return (
 		<>
 			<table>

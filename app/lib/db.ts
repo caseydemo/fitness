@@ -15,33 +15,9 @@ async function dbConnect() {
 	}
 }
 
-export function checkDb() {
-	try {
-		dbConnect();
-	} catch (error) {
-		console.error("db conn failed: ", error);
-	}
-}
-
-export async function insertOne(
-	formData: { name: string; description: string },
-	model: string
-) {
-	try {
-		console.log("name:", formData.name);
-		console.log("description:", formData.description);
-		console.log("model:", model);
-	} catch (error) {
-		console.error("error", error);
-	}
-}
-
 export async function getAllExercises() {
-	try {
-		await dbConnect();
-		const allExercises = await Exercise.find({});
-		return allExercises;
-	} catch (error) {
-		console.error("error", error);
-	}
+    await dbConnect();
+    const exercises = await Exercise.find().exec();
+    return exercises;
 }
+
