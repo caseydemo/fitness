@@ -1,4 +1,9 @@
 import { getAllExercises } from "@/app/lib/db";
+type Exercise = {
+	id: number;
+	name: string;
+	description: string;
+}
 export default async function ExerciseList() {
 	const exercises = await getAllExercises();
 	return (
@@ -12,7 +17,7 @@ export default async function ExerciseList() {
 				</thead>
 				<tbody>
 					{exercises &&
-						exercises.map((exercise) => (
+						exercises.map((exercise: Exercise) => (
 							<tr key={exercise.id}>
 								<td>{exercise.name}</td>
 								<td>{exercise.description}</td>

@@ -1,4 +1,5 @@
 "use client";
+// import { insertOne } from "@/app/lib/db";
 import { useState } from "react";
 export default function ExerciseInputForm() {
 	const [formData, setFormData] = useState({
@@ -26,10 +27,10 @@ export default function ExerciseInputForm() {
         }));
     };
 
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		console.log(formData);
-		// Add your submission logic here
+	
+		const res = await insertOne(formData, "exercise")
 	};
 
 	return (

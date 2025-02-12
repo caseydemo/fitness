@@ -12,5 +12,7 @@ const exerciseSchema = new Schema({
     },
 });
 
-const Exercise = models.Exercise || model("Exercise", exerciseSchema);
+console.log('models:', models)
+
+const Exercise = models.Exercise ? models.Exercise : model("Exercise", exerciseSchema);
 export default Exercise;
