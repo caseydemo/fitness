@@ -25,3 +25,20 @@ export async function getExercises() {
     }
     // return [{ name: "Exercise 1", description: "This is exercise 1" } as Exercise];
 }
+
+export async function createExercise(formData: ExerciseType) {
+    try {
+        // use mongoose to create a new exercise
+        const db = await dbConnect();
+        const exercise = new Exercise(formData);
+        const newExercise = await exercise.save();
+        return {
+            id: newExercise._id.toString(),
+            name: newExercise.name,
+            description: newExercise.description
+        } as ExerciseType;
+    } catch (error) {
+        console.error("createExercise", error);
+        return {} as ExerciseType;
+    }
+}

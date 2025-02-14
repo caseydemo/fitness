@@ -2,7 +2,7 @@
 import { ExerciseType } from "./types";
 import { useEffect, useState } from "react";
 
-import { getExercises } from "./actions/exercise";
+import { getExercises, createExercise } from "./actions/exercise";
 
 export default function Home() {
 	const [exercises, setExercises] = useState([] as ExerciseType[]);
@@ -14,7 +14,10 @@ export default function Home() {
 
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		console.log("Form submitted", formData);
+		// call the action to create an exercise
+        const newExercise = await createExercise(formData);
+        // add the new exercise to the list of exercises
+        setExercises([...exercises, newExercise]);
 	};
 
 	// on initial page load call a user action to get the exercises
