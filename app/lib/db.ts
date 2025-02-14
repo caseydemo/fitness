@@ -1,23 +1,31 @@
-import mongoose from "mongoose";
+"use server";
+import dbConnect from "./mongodb";
 import Exercise from "../models/Exercise";
 
-async function dbConnect() {
-	const connString = process.env.MONGO_URL;
-	if (connString) {
-		console.log("dbConnect...");
-		// @ts-ignore - this is there for some reason ts can't find it
-		await mongoose.connect(process.env.MONGO_URL, {
-			useNewUrlParser: true,
-			useUnifiedTopology: true,
-		});
-	} else {
-		console.error("farts");
-	}
-}
 
 export async function getAllExercises() {
-    await dbConnect();
-    const exercises = await Exercise.find().exec();
-    return exercises;
+    try {
+        await dbConnect();
+        const exercises = await Exercise.find().lean();
+        return exercises;
+    } catch (error) {
+        console.error("getAllExercises", error);
+        return [];
+    }
+}
+
+export async function createExercise(formData: { name: string; description: string }) {
+    try {
+        if(!formData.name || !formData.description) {
+            throw new Error("Missing required fields");
+        }
+        await dbConnect();
+        const { name, description } = formData;
+        const exercise = new Exercise({ name, description });
+        await exercise.save();        
+    } catch (error) {
+        console.error("createExercise", error);
+        throw error;
+    }
 }
 

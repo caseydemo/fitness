@@ -1,10 +1,11 @@
 import mongoose from "mongoose";
-const { Schema, model, models } = mongoose;
+const { Schema } = mongoose;
 
 const exerciseSchema = new Schema({
     name: { type: String, required: true },
     description: { type: String, required: true },
 });
 
-const Exercise = models.Exercise || model("Exercise", exerciseSchema);
-export default Exercise;
+
+
+export default mongoose.models.Exercise || mongoose.model("Exercise", exerciseSchema); 
