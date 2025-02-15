@@ -1,3 +1,5 @@
+import "bootstrap/dist/css/bootstrap.css";
+import BootstrapClient from "./components/BootstrapClient";
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -14,6 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body >
+      <BootstrapClient />
         {children}
       </body>
     </html>
