@@ -43,10 +43,9 @@ export default function Home() {
 
 	return (
 		<main className="">
-			<h1>Home</h1>
+		
 
-			<h2>Exercise Input</h2>
-
+			
 			<div className="">
 				<form ref={form} onSubmit={handleSubmit}>
 					<div className="exercise_form_wrapper">
@@ -79,16 +78,10 @@ export default function Home() {
 				</form>
 			</div>
 
-			<h3>Exercises</h3>
 			{/* add loading state */}
 			{loading && <p>Loading...</p>}
 			{/* add table to display exercises */}
 			{!loading && exercises.length === 0 && <p>No exercises found</p>}
-			{!loading && exercises.length > 0 && (
-				<div>
-					<p>There are {exercises.length} exercises</p>
-				</div>
-			)}
 			{exercises && exercises.length > 0}
 			<Card title="exercises">
 				<table className="table table-dark table-striped">
