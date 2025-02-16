@@ -5,17 +5,20 @@
 	--dark-green-1: #44633F;
 	--darg-green-2: #3F4B3B;
 }
-main {
+body {
 	background-color: var(--light-green-1);
 	text-align: center;
 	vertical-align: middle;
 }
 
 h1, h2, h3, h4, h5 {
-	background-color: var(--dark-green-1);
+	/* background-color: var(--dark-green-1); */
 	color: white !important;
 }
 
 .table-dark {
 	background-color: var(--darg-green-2);
+}
+.input_card {
+	margin-top: 50px !important;
 }
