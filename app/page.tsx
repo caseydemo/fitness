@@ -13,6 +13,7 @@ export default function Home() {
 		description: "",
 	});
 	const form = useRef<HTMLFormElement | null>(null);
+	const [editRows, setEditRows] = useState({});
 
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
@@ -41,9 +42,18 @@ export default function Home() {
 		});
 	}, []);
 
+	const handleEdit = (index: number) => {
+		console.log("index:", index);
+		setEditRows({ ...editRows, [index]: true });
+		console.log("editRows", editRows);
+	};
+
+	const handleSave = (index) => {
+		setEditRows({ ...editRows, [index]: false });
+	  };
+
 	return (
 		<main className="">
-
 			<Card title="Inputs" extraClasses="input_card">
 				<form ref={form} onSubmit={handleSubmit}>
 					<div className="container">
@@ -74,7 +84,7 @@ export default function Home() {
 								</label>
 							</div>
 						</div>
-						<div className="row" >
+						<div className="row">
 							<button
 								type="submit"
 								className="btn btn-primary"
@@ -96,14 +106,35 @@ export default function Home() {
 					<thead>
 						<tr>
 							<th scope="col">Name</th>
-							<th scope="col">Description</th>
+							<th scope="col" colSpan={2}>
+								Description
+							</th>
 						</tr>
 					</thead>
 					<tbody>
-						{exercises.map((exercise) => (
-							<tr key={exercise.id}>
+						{exercises.map((exercise, index) => (
+							<tr key={index}>
 								<td>{exercise.name}</td>
 								<td>{exercise.description}</td>
+								<td>
+									{editRows[index] ? (
+										<button
+											onClick={() =>
+												handleSave(index)
+											}
+										>
+											Save
+										</button>
+									) : (
+										<button
+											onClick={() =>
+												handleEdit(index)
+											}
+										>
+											Edit
+										</button>
+									)}
+								</td>
 							</tr>
 						))}
 					</tbody>
