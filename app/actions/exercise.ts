@@ -66,3 +66,15 @@ export async function updateExercise(exerciseData: ExerciseType) {
 		throw error;
 	}
 }
+
+export async function deleteExercise(id: string) {
+    try {
+        if(!id) {
+            throw new Error("missing parameters in handle delete method");
+        }
+        const deleteResult = await Exercise.findByIdAndDelete(id)
+    } catch (error) {
+        console.error(error)
+        throw error;
+    }
+}
