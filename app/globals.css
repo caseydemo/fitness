@@ -12,13 +12,9 @@ body {
 }
 
 h1, h2, h3, h4, h5 {
-	/* background-color: var(--dark-green-1); */
 	color: white !important;
 }
 
 .table-dark {
 	background-color: var(--darg-green-2);
-}
-.input_card {
-	margin-top: 50px !important;
 }
