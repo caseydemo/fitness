@@ -43,40 +43,48 @@ export default function Home() {
 
 	return (
 		<main className="">
-		
 
-			
-			<div className="">
+			<Card title="Inputs" extraClasses="input_card">
 				<form ref={form} onSubmit={handleSubmit}>
-					<div className="exercise_form_wrapper">
-						<label className="input-group-text">
-							Name:
-							<input
-								className="form-control"
-								type="text"
-								value={formData.name}
-								name="name"
-								onChange={handleFormChange}
-							/>
-						</label>
+					<div className="container">
+						<div className="row">
+							<div className="col-sm">
+								<label className="input-group-text">
+									Name:
+									<input
+										className="form-control"
+										type="text"
+										value={formData.name}
+										name="name"
+										onChange={handleFormChange}
+									/>
+								</label>
+							</div>
 
-						<label className="input-group-text">
-							Description:
-							<input
-								className="form-control"
-								type="text"
-								value={formData.description}
-								name="description"
-								onChange={handleFormChange}
-							/>
-						</label>
-
-						<button type="submit" className="btn btn-primary">
-							Submit
-						</button>
+							<div className="col-sm">
+								<label className="input-group-text">
+									Description:
+									<input
+										className="form-control"
+										type="text"
+										value={formData.description}
+										name="description"
+										onChange={handleFormChange}
+									/>
+								</label>
+							</div>
+						</div>
+						<div className="row" >
+							<button
+								type="submit"
+								className="btn btn-primary"
+							>
+								Submit
+							</button>
+						</div>
 					</div>
 				</form>
-			</div>
+			</Card>
 
 			{/* add loading state */}
 			{loading && <p>Loading...</p>}
