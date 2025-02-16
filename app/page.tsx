@@ -2,7 +2,7 @@
 import { ExerciseType } from "./types";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 
-import { getExercises, createExercise, updateExercise } from "./actions/exercise";
+import { getExercises, createExercise, updateExercise, deleteExercise } from "./actions/exercise";
 import Card from "./components/Card";
 
 export default function Home() {
@@ -48,7 +48,7 @@ export default function Home() {
 		console.log("editRows", editRows);
 	};
 
-	const handleSave = (index: number, exercise: any) => {
+	const handleSave = (index: number, exercise: ExerciseType) => {
 		updateExercise(exercise)
 		setEditRows({ ...editRows, [index]: false });
 	};
@@ -59,6 +59,16 @@ export default function Home() {
 		);
 		setExercises(updatedData);
 	};
+
+	const handleDelete = (index: number, exercise: ExerciseType) => {
+		if(!index || !exercise || !exercise.id) {
+			console.error('missing delete parameters')
+		}
+		deleteExercise(exercise.id)
+		// remove this index from the exercises object
+		setExercises(exercises.filter((v, i) => i !== index));
+
+	}
 
 	return (
 		<main className="">
@@ -116,7 +126,8 @@ export default function Home() {
 						{Object.keys(exercises[0] || {}).map((key) => (
 							<th key={key}>{key}</th>
 						))}
-						<th>Actions</th>
+						<th>Update</th>
+						<th>Delete</th>
 					</tr>
 					</thead>
 					<tbody>
@@ -141,6 +152,9 @@ export default function Home() {
 							  ) : (
 								<button onClick={() => handleEdit(index)}>Edit</button>
 							  )}
+							</td>
+							<td>
+								<button onClick={() => {handleDelete(index, exercise)}} >delete</button>
 							</td>
 						  </tr>
 						))}
