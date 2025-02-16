@@ -7,15 +7,9 @@ export default function Card(props: any) {
 		<div className={`${styles.card} ${classes}`} >
 			<div className="card-body">
 				<h5 className="card-title">{title}</h5>
-				<p className="card-text">
+				<div className="card-text">
 					{children}
-				</p>
-				<a href="#" className="card-link">
-					Card link
-				</a>
-				<a href="#" className="card-link">
-					Another link
-				</a>
+				</div>
 			</div>
 		</div>
 	);
