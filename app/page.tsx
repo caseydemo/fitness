@@ -2,7 +2,7 @@
 import { ExerciseType } from "./types";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 
-import { getExercises, createExercise } from "./actions/exercise";
+import { getExercises, createExercise, updateExercise } from "./actions/exercise";
 import Card from "./components/Card";
 
 export default function Home() {
@@ -48,9 +48,17 @@ export default function Home() {
 		console.log("editRows", editRows);
 	};
 
-	const handleSave = (index) => {
+	const handleSave = (index: number, exercise: any) => {
+		updateExercise(exercise)
 		setEditRows({ ...editRows, [index]: false });
-	  };
+	};
+
+	const handleChange = (index: number, key: string, value: string) => {
+		const updatedData = exercises.map((row, i) =>
+		  i === index ? { ...row, [key]: value } : row
+		);
+		setExercises(updatedData);
+	};
 
 	return (
 		<main className="">
@@ -104,38 +112,37 @@ export default function Home() {
 			<Card title="exercises">
 				<table className="table table-dark table-striped">
 					<thead>
-						<tr>
-							<th scope="col">Name</th>
-							<th scope="col" colSpan={2}>
-								Description
-							</th>
-						</tr>
+					<tr>
+						{Object.keys(exercises[0] || {}).map((key) => (
+							<th key={key}>{key}</th>
+						))}
+						<th>Actions</th>
+					</tr>
 					</thead>
 					<tbody>
 						{exercises.map((exercise, index) => (
-							<tr key={index}>
-								<td>{exercise.name}</td>
-								<td>{exercise.description}</td>
-								<td>
-									{editRows[index] ? (
-										<button
-											onClick={() =>
-												handleSave(index)
-											}
-										>
-											Save
-										</button>
-									) : (
-										<button
-											onClick={() =>
-												handleEdit(index)
-											}
-										>
-											Edit
-										</button>
-									)}
-								</td>
-							</tr>
+						<tr key={index}>
+							{Object.keys(exercise).map((key) => (
+							  <td key={key}>
+								{editRows[index] ? (
+								  <input
+									type="text"
+									value={exercise[key]}
+									onChange={(e) => handleChange(index, key, e.target.value)}
+								  />
+								) : (
+									exercise[key]
+								)}
+							  </td>
+							))}
+							<td>
+							  {editRows[index] ? (
+								<button onClick={() => handleSave(index, exercise)}>Save</button>
+							  ) : (
+								<button onClick={() => handleEdit(index)}>Edit</button>
+							  )}
+							</td>
+						  </tr>
 						))}
 					</tbody>
 				</table>
