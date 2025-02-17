@@ -6,7 +6,9 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "letsgo": "npm run cleanslate && npm run dev && echo 'All set and ready to go!' ",
+    "cleanslate": "echo 'Hard resetting local environment' && rimraf ./package-lock.json && rimraf ./.next/cache && rimraf ./node_modules && npm install"    
   },
   "dependencies": {
     "mongodb": "^6.12.0",
@@ -20,6 +22,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "typescript": "^5"
+    "typescript": "^5",
+    "rimraf": "~6.0"
   }
 }

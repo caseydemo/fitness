@@ -1,6 +1,6 @@
 "use client";
 import { ExerciseType } from "./types";
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { getExercises, createExercise, updateExercise, deleteExercise } from "./actions/exercise";
 import Card from "./components/Card";
