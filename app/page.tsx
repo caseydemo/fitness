@@ -1,6 +1,7 @@
 "use client";
 import { ExerciseType } from "./types";
 import { useEffect, useRef, useState } from "react";
+import Exercises from "./components/exercises/Exercises";
 
 import { getExercises, createExercise, updateExercise, deleteExercise } from "./actions/exercise";
 import Card from "./components/Card";
@@ -35,12 +36,12 @@ export default function Home() {
 	};
 
 	// on initial page load call a user action to get the exercises
-	useEffect(() => {
-		getExercises().then((data) => {
-			setExercises(data);
-			setLoading(false);
-		});
-	}, []);
+	// useEffect(() => {
+	// 	getExercises().then((data) => {
+	// 		setExercises(data);
+	// 		setLoading(false);
+	// 	});
+	// }, []);
 
 	const handleEdit = (index: number) => {
 		console.log("index:", index);
@@ -72,95 +73,7 @@ export default function Home() {
 
 	return (
 		<main className="">
-			<Card title="Inputs" extraClasses="input_card">
-				<form ref={form} onSubmit={handleSubmit}>
-					<div className="container">
-						<div className="row">
-							<div className="col-sm">
-								<label className="input-group-text">
-									Name:
-									<input
-										className="form-control"
-										type="text"
-										value={formData.name}
-										name="name"
-										onChange={handleFormChange}
-									/>
-								</label>
-							</div>
-
-							<div className="col-sm">
-								<label className="input-group-text">
-									Description:
-									<input
-										className="form-control"
-										type="text"
-										value={formData.description}
-										name="description"
-										onChange={handleFormChange}
-									/>
-								</label>
-							</div>
-						</div>
-						<div className="row">
-							<button
-								type="submit"
-								className="btn btn-primary"
-							>
-								Submit
-							</button>
-						</div>
-					</div>
-				</form>
-			</Card>
-
-			{/* add loading state */}
-			{loading && <p>Loading...</p>}
-			{/* add table to display exercises */}
-			{!loading && exercises.length === 0 && <p>No exercises found</p>}
-			{exercises && exercises.length > 0}
-			<Card title="exercises">
-				<table className="table table-dark table-striped">
-					<thead>
-					<tr>
-						{Object.keys(exercises[0] || {}).map((key) => (
-							<th key={key}>{key}</th>
-						))}
-						<th>Update</th>
-						<th>Delete</th>
-					</tr>
-					</thead>
-					<tbody>
-						{exercises.map((exercise, index) => (
-						<tr key={index}>
-							{Object.keys(exercise).map((key) => (
-							  <td key={key}>
-								{editRows[index] ? (
-								  <input
-									type="text"
-									value={exercise[key]}
-									onChange={(e) => handleChange(index, key, e.target.value)}
-								  />
-								) : (
-									exercise[key]
-								)}
-							  </td>
-							))}
-							<td>
-							  {editRows[index] ? (
-								<button onClick={() => handleSave(index, exercise)}>Save</button>
-							  ) : (
-								<button onClick={() => handleEdit(index)}>Edit</button>
-							  )}
-							</td>
-							<td>
-								<button onClick={() => {handleDelete(index, exercise)}} >delete</button>
-							</td>
-						  </tr>
-						))}
-					</tbody>
-				</table>
-			</Card>
+            <Exercises />			
 		</main>
 	);
 }
