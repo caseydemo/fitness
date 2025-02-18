@@ -1,7 +1,8 @@
 import Card from "../Card";
 export default function ExerciseView(props: any) {
-	const { loading, exercises, editRows, handleEdit, handleSave, handleChange } = props;
-	return (
+	const { loading, exercises, editRows, handleEdit, handleSave, handleChange, handleDelete } = props;
+	console.log('handle change', handleChange)
+    return (
 		<>
 			{/* add loading state */}
 			{loading && <p>Loading...</p>}

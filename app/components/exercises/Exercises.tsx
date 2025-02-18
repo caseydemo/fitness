@@ -88,6 +88,7 @@ export default function Exercises() {
 				<ExerciseView 
                     loading={loading}
                     exercises={exercises}
+                    handleChange={handleChange}
                     handleEdit={handleEdit}
                     handleSave={handleSave}
                     handleDelete={handleDelete}
