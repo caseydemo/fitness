@@ -1,4 +1,4 @@
-import Card from "../Card";
+import Card from "../components/Card";
 export default function ExerciseView(props: any) {
 	const { loading, exercises, editRows, handleEdit, handleSave, handleChange, handleDelete } = props;
 	console.log('handle change', handleChange)

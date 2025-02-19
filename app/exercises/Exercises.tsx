@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import Card from "../Card";
+import Card from "@/app/components/Card";
 import ExerciseForm from "./ExerciseForm";
 import ExerciseView from "./ExerciseView";
 import { ExerciseType } from "@/app/types";
