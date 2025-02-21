@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
-import { SetType, ExerciseLogType, LogType } from "../types";
+import { WorkoutType } from "../types";
 
 
 const workoutSchema = new Schema({
@@ -29,7 +29,7 @@ workoutSchema.methods.toJSON = function () {
         ended: this.ended,
         exercises: this.exercises,
         notes: this.notes,
-    } as LogType;
+    } as WorkoutType;
 };
 
 
