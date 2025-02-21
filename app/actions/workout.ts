@@ -17,9 +17,27 @@ export async function getWorkouts() {
 			return workouts.map((workout) => workout.toJSON());
 		}
 	} catch (error) {
-		console.error("getLogs", error);
+		console.error("get workouts: ", error);
 		return [];
 	}
 }
 
+export async function getWorkoutById(id: string) {
+    try {
+        // use mongoose to get all logs
+        await dbConnect();		
+        const workout = await Workout.findById(id);
+        if (!workout) {
+            console.log("No workout found");
+            return null;
+        } else {
+            console.log("workout found");
+            // return id, name and description
+            return workout.toJSON();
+        }
+    } catch (error) {
+        console.error("get individual workout by id: ", error);
+        return null;
+    }
+}
 
