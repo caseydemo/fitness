@@ -17,8 +17,8 @@ export type ExerciseLogType = {
 
 export type LogType = {
     id: string;
-    time_started: Date;
-    time_ended: Date;
+    started: Date;
+    ended: Date;
     exercises: ExerciseLogType[];
     notes: string;
 }
