@@ -1,5 +1,5 @@
 
-import { getLogs } from "../actions/workout";
+import { getWorkouts } from "../actions/workout";
 export default async function Workouts() {
     const workouts = await getWorkouts();
     workouts.map((workout) => {
