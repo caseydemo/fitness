@@ -36,7 +36,7 @@ export default function TopNav() {
 						<li className='nav-item'>
 							<a
 								className='nav-link'
-								href='workouts'
+								href='/workouts'
 							>
 								Workouts
 							</a>
