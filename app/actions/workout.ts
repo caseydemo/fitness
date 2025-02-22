@@ -52,9 +52,15 @@ export async function getWorkoutByWorkoutId(workoutId: number) {
             console.log('no documents found')
             throw new Error("could not find document")
         } else {
-            // success
-            
-            return toJSON(workout[0])
+
+			return {
+				id: workout[0]._id.toString(),
+				started: workout[0].started.toLocaleDateString(),
+				exercises: workout[0].exercises,
+				ended: workout[0].ended ?? workout[0].notes,
+				workoutId: workout[0].workoutId
+			}
+
         }
         
 	} catch (error) {
@@ -62,15 +68,3 @@ export async function getWorkoutByWorkoutId(workoutId: number) {
         return null;
     }
 }
-
-
-function toJSON (workout) {
-    return {
-        id: workout._id.toString(),
-        started: workout.started,
-        ended: workout.ended,
-        exercises: workout.exercises,
-        notes: workout.notes,
-        workoutId: workout.workoutId
-    } as WorkoutType;
-};
