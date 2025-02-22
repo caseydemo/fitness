@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import Card from "@/app/components/Card";
 import ExerciseForm from "./ExerciseForm";
-import ExerciseView from "./ExerciseView";
+import ExerciseView from "./ExercisesView";
 import { ExerciseType } from "@/app/types";
 import { createExercise, deleteExercise, getExercises, updateExercise } from "@/app/actions/exercise";
 

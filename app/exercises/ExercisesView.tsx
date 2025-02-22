@@ -1,5 +1,5 @@
 import Card from "../components/Card";
-export default function ExerciseView(props: any) {
+export default function ExercisesView(props: any) {
 	const { loading, exercises, editRows, handleEdit, handleSave, handleChange, handleDelete } = props;	
     return (
 		<>
