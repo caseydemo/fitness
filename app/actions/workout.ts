@@ -12,7 +12,7 @@ export async function getWorkouts() {
 			console.log("No workouts found");
 			return [];
 		} else {
-			console.log("workouts found");
+			
 			// return id, name and description
 			return workouts.map((workout) => workout.toJSON());
 		}

@@ -16,6 +16,10 @@ const workoutSchema = new Schema({
         type: [Object],
         required: true,
     },
+    workoutId: {
+        type: Number,
+        required: true,
+    },
     notes: {
         type: String,
         required: false,
@@ -29,6 +33,7 @@ workoutSchema.methods.toJSON = function () {
         ended: this.ended,
         exercises: this.exercises,
         notes: this.notes,
+        workoutId: this.workoutId
     } as WorkoutType;
 };
 
