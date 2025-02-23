@@ -12,10 +12,10 @@ export default function Page() {
 
 	// on initial page load call a user action to get the exercises
 	useEffect(() => {
-		console.log('use effect called')
+		console.log("use effect called");
 		getWorkoutByWorkoutId(workoutId).then((data) => {
-			console.log('get workout by workout id called')
-		
+			console.log("get workout by workout id called");
+
 			setWorkout(data);
 			setLoading(false);
 		});
@@ -28,37 +28,29 @@ export default function Page() {
 			) : (
 				<Card title={`Workout ID: ${workoutId}`}>
 					<h3>Date: {workout.started}</h3>
-					
-					<table className="table table-striped">
-						<thead>
-							<tr>
-								<th>exercise</th>
-								<th>set 1</th>
-								<th>set 2</th>
-								<th>set 3</th>
-							</tr>
-						</thead>
-						<tbody>
-							{workout.exercises.map((outerGroup, index) => (
-								
-								<tr key={index} >
-									{console.log('index', index)}
-									<td>{outerGroup.name}</td>
-									{outerGroup.sets.map((set, innerIndex) => (
-										<td key={`set-${innerIndex}`} >
-											<div>weight: {set.weight}</div>
-											<div>reps: {set.reps}</div>
-											<div>notes: {set.notes}</div>
-										</td>
 
-									))}
-									{/* <td>1</td>
-									<td>1</td>
-									<td>1</td> */}
-								</tr>
-							))}
-						</tbody>
-					</table>
+					{/* loop over all the groups named 'exercises' and just print the name out for now */}
+
+					{workout.exercises.map((exercise) => (
+						<Card title={exercise.name}>
+							{exercise.notes && (
+								<div>notes: {exercise.notes}</div>
+							)}
+							<div className="container">
+								{exercise.sets.map((set, setIndex) => (
+									<div
+										key={`${exercise.name}-set-${setIndex}`}
+									>
+										weight: {set.weight}, reps:{" "}
+										{set.reps}{" "}
+										{exercise.notes &&
+											`, notes: ${exercise.notes}`}
+									</div>
+								))}
+							</div>
+							{console.log(exercise)}
+						</Card>
+					))}
 				</Card>
 			)}
 		</div>
