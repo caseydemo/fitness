@@ -48,9 +48,8 @@ export default function Workouts() {
 							</tr>
 						</thead>
 						<tbody>
-							{workouts.map((workout) => (
-                            
-								<tr key={workout.id}>
+							{workouts.map((workout) => (                                                        
+								<tr key={workout.id}>                                    
 									<td>
 										<Link href={`/workouts/${String(workout.workoutId)}`} >
 											{

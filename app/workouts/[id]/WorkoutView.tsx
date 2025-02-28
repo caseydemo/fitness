@@ -5,7 +5,7 @@ interface WorkoutViewProps {
 }
 
 export default function WorkoutView({ workout }: WorkoutViewProps) {
-    console.log('workout:', workout);
+    // console.log('workout:', workout);
     return (
         <div>
             {/* Workout view content */}

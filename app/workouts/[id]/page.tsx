@@ -14,12 +14,7 @@ export default function Page() {
 
 	// on initial page load call a user action to get the exercises
 	useEffect(() => {
-
-        console.log('I am only called once')
-
 		getWorkoutByWorkoutId(workoutId).then((data) => {
-			console.log("get workout by workout id called");
-
 			if (data) {
 				setWorkout({ ...data, notes: data.notes || "" });
 			}
@@ -37,16 +32,18 @@ export default function Page() {
 
 					{/* loop over all the groups named 'exercises' and just print the name out for now */}
 
-                    <WorkoutView workout={workout} />
+					{/* <WorkoutView workout={workout} /> */}
 
 					{workout.exercises.map((exercise) => (
-						<Card title={exercise.name} key={exercise.id}>
-							{exercise.notes && (
-								<div>notes: {exercise.notes}</div>
-							)}
-
-							{/* do all the same stuff, but in a table */}
-							<table className='table'>
+						<Card
+							title={exercise.name}
+							key={`card-${workout.id}-${exercise.name}`}
+						>
+							<div>notes: {exercise.notes}</div>
+							<table
+								className='table'
+								key={`table-${workout.id}-${exercise.name}`}
+							>
 								<thead className='table'>
 									<tr>
 										<th>Reps</th>
@@ -55,16 +52,15 @@ export default function Page() {
 									</tr>
 								</thead>
 								<tbody>
-                                    {exercise.sets.map((set, index) => (
-                                        <>
-                                            {console.log(`${exercise.name}-set-${index}`)}
-                                            <tr key={`${exercise.name}-set-${index}`}>
-                                                <td>{set.reps}</td>
-                                                <td>{set.weight}</td>
-                                                <td>{set.notes}</td>
-                                            </tr>
-                                        </>
-                                    ))}
+									{exercise.sets.map((set, index) => (
+										<tr
+											key={`${exercise.name}-set-${index}-table-${workout.id}`}
+										>
+											<td>{set.reps}</td>
+											<td>{set.weight}</td>
+											<td>{set.notes}</td>
+										</tr>
+									))}
 								</tbody>
 							</table>
 						</Card>
