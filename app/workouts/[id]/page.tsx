@@ -3,20 +3,26 @@ import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { getWorkoutByWorkoutId } from "@/app/actions/workout";
 import Card from "@app/components/Card";
+import { WorkoutType } from "@/app/types";
+import WorkoutView from "./WorkoutView";
 
 export default function Page() {
 	const params = useParams();
-	const workoutId = params.id;
+	const workoutId = Number(params.id);
 	const [loading, setLoading] = useState(true);
-	const [workout, setWorkout] = useState({});
+	const [workout, setWorkout] = useState({} as WorkoutType);
 
 	// on initial page load call a user action to get the exercises
 	useEffect(() => {
-		console.log("use effect called");
+
+        console.log('I am only called once')
+
 		getWorkoutByWorkoutId(workoutId).then((data) => {
 			console.log("get workout by workout id called");
 
-			setWorkout(data);
+			if (data) {
+				setWorkout({ ...data, notes: data.notes || "" });
+			}
 			setLoading(false);
 		});
 	}, []);
@@ -27,28 +33,40 @@ export default function Page() {
 				<p>Loading...</p>
 			) : (
 				<Card title={`Workout ID: ${workoutId}`}>
-					<h3>Date: {workout.started}</h3>
+					<h3>Date: {workout.started.toString()}</h3>
 
 					{/* loop over all the groups named 'exercises' and just print the name out for now */}
 
+                    <WorkoutView workout={workout} />
+
 					{workout.exercises.map((exercise) => (
-						<Card title={exercise.name}>
+						<Card title={exercise.name} key={exercise.id}>
 							{exercise.notes && (
 								<div>notes: {exercise.notes}</div>
 							)}
-							<div className="container">
-								{exercise.sets.map((set, setIndex) => (
-									<div
-										key={`${exercise.name}-set-${setIndex}`}
-									>
-										weight: {set.weight}, reps:{" "}
-										{set.reps}{" "}
-										{exercise.notes &&
-											`, notes: ${exercise.notes}`}
-									</div>
-								))}
-							</div>
-							{console.log(exercise)}
+
+							{/* do all the same stuff, but in a table */}
+							<table className='table'>
+								<thead className='table'>
+									<tr>
+										<th>Reps</th>
+										<th>Weight</th>
+										<th>Notes</th>
+									</tr>
+								</thead>
+								<tbody>
+                                    {exercise.sets.map((set, index) => (
+                                        <>
+                                            {console.log(`${exercise.name}-set-${index}`)}
+                                            <tr key={`${exercise.name}-set-${index}`}>
+                                                <td>{set.reps}</td>
+                                                <td>{set.weight}</td>
+                                                <td>{set.notes}</td>
+                                            </tr>
+                                        </>
+                                    ))}
+								</tbody>
+							</table>
 						</Card>
 					))}
 				</Card>

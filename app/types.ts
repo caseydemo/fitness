@@ -10,16 +10,20 @@ export type SetType = {
     notes?: string;
 }
 
-export type ExerciseLogType = {    
+export type ExerciseLogType = {
+    id?: string;
+    name: string;
+    notes?: string;    
     exercise: ExerciseType;
     sets: SetType[];
 }
 
 export type WorkoutType = {
+    workoutId?: number;
     id: string;
     started: Date;
     ended: Date;
     exercises: ExerciseLogType[];
-    notes: string;
+    notes?: string;
 }
 

@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { getWorkouts } from "../actions/workout";
 import Card from "../components/Card";
-import { WorkoutType, WorkoutSummaryType, ExerciseType } from "../types";
+import { WorkoutType } from "../types";
 import Link from "next/link";
 
 export default function Workouts() {
