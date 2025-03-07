@@ -21,8 +21,8 @@ export type ExerciseLogType = {
 export type WorkoutType = {
     workoutId?: number;
     id: string;
-    started: Date;
-    ended: Date;
+    started: string;
+    ended?: string;
     exercises: ExerciseLogType[];
     notes?: string;
 }

@@ -1,9 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
-import { getWorkouts, createWorkout } from "../actions/workout";
+import { getWorkouts, createWorkout, getWorkoutById } from "../actions/workout";
 import Card from "../components/Card";
 import { WorkoutType } from "../types";
 import Link from "next/link";
+import { get } from "http";
 
 export default function Workouts() {
 	const [loading, setLoading] = useState(true);
@@ -39,7 +40,17 @@ export default function Workouts() {
         // 2. redirect to the new workout/[id] page with the new workoutId
 
         const newWorkout = await createWorkout();
-        console.log('new workout:', newWorkout);
+        // get the workoutId by calling getWorkoutById with the newWorkout.id
+        const fullWorkoutData = await getWorkoutById(newWorkout.id)
+
+        const workoutId = fullWorkoutData.workoutId
+        
+        if(workoutId) {
+            window.location.href = `/workouts/${workoutId}`
+        } else {
+            console.error('no workoutId found')
+        }
+        
 
         
     }
