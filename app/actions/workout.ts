@@ -2,7 +2,24 @@
 // import { ExerciseType } from "../types";
 import Workout from "../models/Workout";
 import dbConnect from "../lib/mongodb";
-import { WorkoutType } from "../types";
+
+
+export async function createWorkout() {
+    try {
+        await dbConnect();
+        
+        const workout = {
+            started: new Date(),
+            exercises: [],            
+        };
+        const newWorkout = new Workout(workout);
+        const savedWorkout = await newWorkout.save();
+        return savedWorkout.toJSON();
+    } catch (error) {
+        console.error("create workout: ", error);
+        return null;
+    }
+}
 
 export async function getWorkouts() {
 	try {

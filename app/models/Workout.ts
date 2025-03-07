@@ -10,7 +10,7 @@ const workoutSchema = new Schema({
     },
     ended: {
         type: Date,
-        required: true,
+        required: false,
     },
     exercises: {
         type: [Object],
@@ -18,7 +18,7 @@ const workoutSchema = new Schema({
     },
     workoutId: {
         type: Number,
-        required: true,
+        required: false,
     },
     notes: {
         type: String,

@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { getWorkouts } from "../actions/workout";
+import { getWorkouts, createWorkout } from "../actions/workout";
 import Card from "../components/Card";
 import { WorkoutType } from "../types";
 import Link from "next/link";
@@ -33,8 +33,20 @@ export default function Workouts() {
 		return summary;
 	};
 
+    const handleNewWorkoutClick = async () => {
+        // what I want to happen...
+        // 1. create a new workout
+        // 2. redirect to the new workout/[id] page with the new workoutId
+
+        const newWorkout = await createWorkout();
+        console.log('new workout:', newWorkout);
+
+        
+    }
+
 	return (
 		<>
+            <button className="btn btn-primary" onClick={handleNewWorkoutClick}>New Workout</button>
 			<Card title="Workout Summaries">
 				{/* if loading display loading message - else display a table with workout summaries */}
 				{loading ? (
