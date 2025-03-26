@@ -85,3 +85,34 @@ export async function getWorkoutByWorkoutId(workoutId: number) {
         return null;
     }
 }
+
+// generic empty exercise group
+const emptyExercise = {
+    name: "exercise",
+    sets: [0, 0, 0],
+    reps: [0, 0, 0],
+    weight: [0, 0, 0]
+}
+
+// add a blank exercise to the workout
+export async function addExerciseToWorkout(workoutId: number, exerciseId: number) {
+    try {
+        await dbConnect();
+                
+        const workout = await getWorkoutByWorkoutId(workoutId);
+        if (!workout) {
+            console.log("workout not found");
+            return null;
+        }
+        
+        workout.exercises.push(emptyExercise);
+        console.log('workout:', workout);
+        
+        
+
+        // return updatedWorkout.toJSON();
+    } catch (error) {
+        console.error("add exercise to workout: ", error);
+        return null;
+    }
+}

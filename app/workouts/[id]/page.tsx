@@ -5,7 +5,9 @@ import { getWorkoutByWorkoutId } from "@/app/actions/workout";
 import Card from "@app/components/Card";
 import { WorkoutType } from "@/app/types";
 import WorkoutView from "./WorkoutView";
-import AddExerciseToWorkoutButton from "./AddExerciseToWorkoutButton";
+import AddExerciseToWorkoutButton from "../../components/AddExerciseToWorkoutButton";
+import ExerciseDropDown from "@/app/components/ExerciseDropDown";
+import AddExerciseInput from "./AddExerciseInput";
 
 export default function Page() {
 	const params = useParams();
@@ -42,7 +44,7 @@ export default function Page() {
 				<p>Loading...</p>
 			) : (
                 <>
-                <AddExerciseToWorkoutButton workoutId={workoutId} />
+                <AddExerciseInput workoutId={workoutId} />                
 				<WorkoutView workout={workout} loading={loading} />
                 </>
 			)}

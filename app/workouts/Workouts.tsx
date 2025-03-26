@@ -4,7 +4,6 @@ import { getWorkouts, createWorkout, getWorkoutById } from "../actions/workout";
 import Card from "../components/Card";
 import { WorkoutType } from "../types";
 import Link from "next/link";
-import { get } from "http";
 
 export default function Workouts() {
 	const [loading, setLoading] = useState(true);

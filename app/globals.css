@@ -4,9 +4,12 @@
 	--light-green-2: #5A9367;
 	--dark-green-1: #44633F;
 	--darg-green-2: #3F4B3B;
+    --dark-blue: rgb(44, 44, 84);
+    --purple: rgb(164, 14, 76);
+    --orange: rgb(245, 214, 186);
 }
 body {
-	background-color: var(--light-green-1);
+	background-color: var(--dark-blue);
 	text-align: center;
 	vertical-align: middle;
 }
