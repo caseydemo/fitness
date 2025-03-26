@@ -2,11 +2,8 @@
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { getWorkoutByWorkoutId } from "@/app/actions/workout";
-import Card from "@app/components/Card";
 import { WorkoutType } from "@/app/types";
 import WorkoutView from "./WorkoutView";
-import AddExerciseToWorkoutButton from "../../components/AddExerciseToWorkoutButton";
-import ExerciseDropDown from "@/app/components/ExerciseDropDown";
 import AddExerciseInput from "./AddExerciseInput";
 
 export default function Page() {
