@@ -5,6 +5,7 @@ import ExerciseSelect from "@/app/components/ExerciseSelect";
 import Card from "@/app/components/Card";
 import styles from "./add-exercise-input.module.css";
 import { getExercises } from "@/app/actions/exercise";
+import { addExerciseToWorkout } from "@/app/actions/workout";
 
 type AddExerciseInputProps = {
 	workoutId: number;
@@ -40,7 +41,12 @@ export default function AddExerciseInput({
             alert("Please select an exercise");
             return;
         }
-        console.log('add ', selectedExercise, ' to workout ', workoutId);		
+        try {
+            // call the action to add the exercise to the workout
+            addExerciseToWorkout(workoutId, selectedExercise);
+        } catch (error) {
+            console.error("error adding exercise to workout: ", error);
+        }
 		
 	}
 

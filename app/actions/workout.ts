@@ -1,5 +1,6 @@
 "use server";
 // import { ExerciseType } from "../types";
+import { getExerciseById } from "./exercise";
 import Workout from "../models/Workout";
 import dbConnect from "../lib/mongodb";
 
@@ -95,7 +96,7 @@ const emptyExercise = {
 }
 
 // add a blank exercise to the workout
-export async function addExerciseToWorkout(workoutId: number, exerciseId: number) {
+export async function addExerciseToWorkout(workoutId: number, exerciseId: string) {
     try {
         await dbConnect();
                 
@@ -105,8 +106,19 @@ export async function addExerciseToWorkout(workoutId: number, exerciseId: number
             return null;
         }
         
-        workout.exercises.push(emptyExercise);
-        console.log('workout:', workout);
+        console.log('this is the exercise id:', exerciseId)
+
+        // get the full exercise from the database
+        const exercise = await getExerciseById(exerciseId);
+        if (!exercise) {
+            console.log("exercise not found");
+            return null;
+        }
+        console.log('new exercise:', exercise)
+        // workout.exercises.push(emptyExercise);
+        
+        // const updatedWorkout = await Workout.findByIdAndUpdate(workout.id, workout, { new: true });
+        // console.log('updated workout:', updatedWorkout)
         
         
 

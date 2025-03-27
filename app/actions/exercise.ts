@@ -3,6 +3,27 @@ import { ExerciseType } from "../types";
 import Exercise from "../models/Exercise";
 import dbConnect from "../lib/mongodb";
 
+export async function getExerciseById(id: string) {
+    console.log("getExerciseById", id);
+    try {
+        if (!id) {
+            throw new Error("missing id in getExerciseById function");
+        }
+        const db = await dbConnect();
+        const exercise = await Exercise.findById(id);
+        if (!exercise) {
+            console.log("No exercise found");
+            return null;
+        } else {
+            return exercise.toJSON();
+        }
+    }
+    catch (error) {
+        console.error("getExerciseById", error);
+        return null;
+    }
+}
+
 export async function getExercises() {
 	try {
 		// use mongoose to get all exercises
